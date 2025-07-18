@@ -35,16 +35,16 @@ export default function Users(){
             placeholder='User name'
             />
             <button onClick={getUsersByName}>Buscar usuario</button>
-            
+
             <div className='container'>
             {users && users.map(user => {
                 return (
                 <div key={user._id} className='userCard'>
-                <p className='userName'>User: {user.name}</p>
-                <p>Description: {user.description}</p>
+                <p className='userName'>{user.name}</p>
+                <p>Descripción: {user.description}</p>
                 </div>
                 )
-            }) || <h3>Loading users...</h3>}
+            }) || <h3>Cargando usuarios...</h3>}
             </div>
         </>
         

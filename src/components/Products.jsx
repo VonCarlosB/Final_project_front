@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Products(){
     const [products, setProducts] = useState(null)
@@ -15,12 +16,17 @@ export default function Products(){
         setProducts(productos)
         } catch (error) {
         console.error(error)
+        setProducts([])
         }
     }
 
     const getProductsByName = () => {
-        productInput
-        getProducts(`${productsUrl}/name/${productInput}`)
+        if(productInput !== ''){
+            getProducts(`${productsUrl}/name/${productInput}`)
+        }else{
+            getProducts(productsUrl)
+        }
+        setProductInput('')
     }
 
     useEffect(() => {
@@ -40,14 +46,17 @@ export default function Products(){
             <div className='container'>
             {products && products.map(product => {
                 return (
-                <div key={product._id} className='userCard'>
+                <Link to={`/product/${product._id}`} key={product._id} className='userCard'>
                 <p className='userName'>{product.name}</p>
                 <p>Descripción: {product.description}</p>
                 <p>{product.owner}</p>
                 <p><b>{product.price+' €'}</b></p>
-                </div>
+                </Link>
                 )
-            }) || <h3>Loading products...</h3>}
+            }) || <div style={{flexDirection:'column'}}>
+                <h3>Cargando productos...</h3>
+                <p>Esto puede tardar un poco...</p>
+            </div>}
             </div>
         </>
         
