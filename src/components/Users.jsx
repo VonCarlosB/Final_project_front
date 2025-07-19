@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import NavBar from './NavBar'
 export default function Users(){
     const [users, setUsers] = useState(null)
     const [userInput, setUserInput] = useState('')
@@ -28,6 +29,7 @@ export default function Users(){
 
     return(
         <>
+        <NavBar />
             <input 
             type='text' 
             value={userInput} 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import NavBar from './NavBar'
 
 export default function Products(){
     const [products, setProducts] = useState(null)
@@ -35,6 +36,7 @@ export default function Products(){
 
     return(
         <>
+            <NavBar />
             <input 
             type='text' 
             value={productInput} 

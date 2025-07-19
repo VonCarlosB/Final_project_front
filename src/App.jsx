@@ -1,12 +1,14 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import Users from './components/Users'
 import Products from './components/Products'
-import { useEffect, useState } from 'react'
 import Product from './components/Product'
 import ProductForm from './components/ProductForm'
+import Home from './components/Home'
 
 export default function App() {
+    const [reload, setReload] = useState(false)
     const [products, setProducts] = useState(null)
     const productsUrl = 'https://final-project-back-1lcd.onrender.com/products'
 
@@ -26,22 +28,16 @@ export default function App() {
 
     useEffect(() => {
         getProducts(productsUrl)
-    }, [])
+    }, [reload])
 
   return (
     <>
     <Router>
-      <nav className='navBar'>
-        <Link to='/'>Inicio</Link>
-        <Link to='/users'>Usuarios</Link>
-        <Link to='/products'>Productos</Link>
-        <Link to='/create'>Crear Producto</Link>
-      </nav>
       <Routes>
         <Route path='/users' element={<Users/>}/>
-        <Route path='/' element={<Products/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path='/products' element={<Products/>}/>
-        <Route path='/create' element={<ProductForm/>}/>
+        <Route path='/create' element={<ProductForm setReload={setReload}/>}/>
         {products && 
           products.map(product => <Route path={`/product/${product._id}`} element={<Product product={product}/>}/>)
         }
