@@ -6,6 +6,7 @@ export default function Products(){
     const [products, setProducts] = useState(null)
     const [productInput, setProductInput] = useState('')
     const productsUrl = 'https://final-project-back-1lcd.onrender.com/products'
+    const defaultImage = 'https://res.cloudinary.com/dp2prqxfo/image/upload/v1753027498/no-image-available-icon-vector_kyibzy.jpg'
     
     const getProducts = async (url) => {
         try {
@@ -50,6 +51,7 @@ export default function Products(){
                 return (
                 <Link to={`/product/${product._id}`} key={product._id} className='userCard'>
                 <p className='userName'>{product.name}</p>
+                <img className='productPreview' src={product.image || defaultImage} alt={`Imagen de ${product.name}`}/>
                 <p className='productOwner'>{product.owner}</p>
                 <p className='productDescription'>{product.description}</p>
                 <p className='productPrice'><b>{product.price+' €'}</b></p>

@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
@@ -79,19 +78,22 @@ form{
   justify-content: space-evenly;
 }
 
-input{
-  margin-right: 10px;
-}
-
 textarea{
   resize: none;
   padding: 5px;
 }
 
 input, textarea{
+  margin-right: 10px;
   background-color: whitesmoke;
   color: black;
   border-radius: 5px;
+}
+
+.imagePreview{
+  width: 20%;
+  object-fit: cover;
+  margin: auto;
 }
 
 .container{
@@ -113,15 +115,20 @@ input, textarea{
   background-color: whitesmoke;
   color: black;
   width: 200px;
+  aspect-ratio: 1;
   padding: 5px 20px 10px 20px;
   border-radius: 10px;
   text-align: left;
-  max-height: 250px;
-  overflow-y: auto;
 }
 
 .userCard p{
   font-size: small;
+}
+
+.productPreview{
+  width: 100%;
+  max-height: 100px;
+  object-fit: cover;
 }
 
 .productDescription{
@@ -149,4 +156,35 @@ input, textarea{
   border-radius: 10px;
   padding: 5px 25px 25px 25px;
   text-align: left;
+}
+
+.userView{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.userView img{
+  background-color: red;
+  width: 100px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 50%;
+}
+
+.userDescription{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid whitesmoke;
+  padding: 0 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-height: 200px;
 }

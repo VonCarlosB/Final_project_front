@@ -6,7 +6,6 @@ export default function User({setReload, user}){
 
     const [products, setProducts] = useState(null)
     const [mensaje, setMensaje] = useState('')
-    const buttons = useRef(null)
     const userProductsUrl = 'https://final-project-back-1lcd.onrender.com/products/user/'
 
     const getProducts = async() => {
@@ -31,18 +30,19 @@ export default function User({setReload, user}){
         <>
             <NavBar />
             <div className="userView">
-                <h2>{user.name}</h2>
-                {user.age && <p>Edad: {user.age}</p>}
-                <label>Descripción: </label>
-                <p className="userDescription">{user.description}</p>
-                <div className="botonera" ref={buttons}>
-                    <button>Editar</button>
-                    <button>Desconectar</button>
+                <img src={user.image} alt={user.name}/>
+                <div>
+                    <h2>{user.name}</h2>
+                    <div className="userDescription">
+                        <p>Descripción: </p>
+                        <p>{user.description}</p>
+                    </div>
                 </div>
             </div>
             <h4>{mensaje}</h4>
+            {products && 
             <div className="container">
-                {products && products.map(product => {
+            {products.map(product => {
                 return (
                 <Link to={`/product/${product._id}`} key={product._id} className='userCard'>
                 <p className='userName'>{product.name}</p>
@@ -52,7 +52,7 @@ export default function User({setReload, user}){
                 </Link>
                 )
             })}
-            </div>
+            </div>}
             
         </>
     )

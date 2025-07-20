@@ -5,12 +5,11 @@ export default function EditProductForm({setReload, product}){
     const [name, setName] = useState(product.name)
     const [description, setDescription] = useState(product.description)
     const [price, setPrice] = useState(product.price)
+    const [image, setImage] = useState(product.image)
     const [redirect, setRedirect] = useState(false)
     const [mensaje, setMensaje] = useState('Listo para enviar')
     const buttons = useRef(null)
     const editProductUrl = `https://final-project-back-1lcd.onrender.com/products/${product._id}`
-    console.log(product._id)
-    console.log(editProductUrl)
     
     const deleteProduct = async (e) => {
         e.preventDefault()
@@ -34,16 +33,19 @@ export default function EditProductForm({setReload, product}){
 
     const editProduct = async (e) => {
         e.preventDefault()
-        const product = {name, description, image:null, price}
+
+        const product = new FormData()
+        product.append('name', name)
+        product.append('description', description)
+        product.append('image', image)
+        product.append('price', price)
+
         try {
             setMensaje('Editando el producto...')
             buttons.current.style.display = 'none'
             const response = await fetch(editProductUrl, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type':'application/json',
-                },
-                body: JSON.stringify(product)
+                body: product
             })
             if(!response.ok) throw new Error('No se ha podido editar el producto')
             else{
@@ -70,6 +72,13 @@ export default function EditProductForm({setReload, product}){
 
             <label>Precio del producto (€):</label>
             <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
+
+            <label>Imagen:</label>
+            <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
+            {image && <>
+                <p>{image.name}</p>
+                <img className='imagePreview' src={URL.createObjectURL(image)}/>
+            </>}
             
             <h4>{mensaje}</h4>
 
