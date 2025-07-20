@@ -66,7 +66,6 @@ form{
   flex-wrap: wrap;
   text-align: left;
   justify-self: center;
-  width: 50%;
   gap: 10px;
   background-color: whitesmoke;
   color: black;
@@ -110,12 +109,30 @@ input, textarea{
 }
 
 .userCard{
+  position: relative;
   background-color: whitesmoke;
   color: black;
   width: 200px;
   padding: 5px 20px 10px 20px;
   border-radius: 10px;
   text-align: left;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.userCard p{
+  font-size: small;
+}
+
+.productDescription{
+  max-height: 100px;
+  overflow-y: auto;
+  margin-bottom: 40px;
+}
+
+.productPrice{
+  position: absolute;
+  bottom: 5px;
 }
 
 .userName{

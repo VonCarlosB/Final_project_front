@@ -50,9 +50,9 @@ export default function Products(){
                 return (
                 <Link to={`/product/${product._id}`} key={product._id} className='userCard'>
                 <p className='userName'>{product.name}</p>
-                <p>Descripción: {product.description}</p>
-                <p>{product.owner}</p>
-                <p><b>{product.price+' €'}</b></p>
+                <p className='productOwner'>{product.owner}</p>
+                <p className='productDescription'>{product.description}</p>
+                <p className='productPrice'><b>{product.price+' €'}</b></p>
                 </Link>
                 )
             }) || <div style={{flexDirection:'column'}}>

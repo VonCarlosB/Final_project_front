@@ -1,7 +1,8 @@
 import { useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
+import NavBar from "./NavBar"
 
-export default function ProductForm({setReload}){
+export default function CreateProductForm({setReload}){
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
@@ -44,6 +45,7 @@ export default function ProductForm({setReload}){
 
     return(
         <>
+        <NavBar />
         <h2>Crea tu producto</h2>
         <form onSubmit={(e) => createProduct(e)} onReset={resetForm}>
             <label>Nombre del producto: *</label>

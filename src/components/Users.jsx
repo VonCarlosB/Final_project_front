@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import NavBar from './NavBar'
+import { Link } from 'react-router-dom'
 export default function Users(){
     const [users, setUsers] = useState(null)
     const [userInput, setUserInput] = useState('')
@@ -41,10 +42,13 @@ export default function Users(){
             <div className='container'>
             {users && users.map(user => {
                 return (
-                <div key={user._id} className='userCard'>
-                <p className='userName'>{user.name}</p>
-                <p>Descripción: {user.description}</p>
-                </div>
+                    <Link to={`/${user.name}`} key={user._id}>
+                    <div className='userCard'>
+                    <p className='userName'>{user.name}</p>
+                    <p>Descripción: {user.description}</p>
+                    </div>
+                    </Link>
+                
                 )
             }) || <h3>Cargando usuarios...</h3>}
             </div>
