@@ -9,7 +9,8 @@ export default function EditProductForm({setReload, product}){
     const [redirect, setRedirect] = useState(false)
     const [mensaje, setMensaje] = useState('Listo para enviar')
     const buttons = useRef(null)
-    const editProductUrl = `https://final-project-back-1lcd.onrender.com/products/${product._id}`
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const editProductUrl = `${baseUrl}/products/${product._id}`
     
     const deleteProduct = async (e) => {
         e.preventDefault()
@@ -76,8 +77,7 @@ export default function EditProductForm({setReload, product}){
             <label>Imagen:</label>
             <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
             {image && <>
-                <p>{image.name}</p>
-                <img className='imagePreview' src={URL.createObjectURL(image)}/>
+                <img className='imagePreview' src={product.image || URL.createObjectURL(image)}/>
             </>}
             
             <h4>{mensaje}</h4>

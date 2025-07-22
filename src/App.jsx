@@ -1,20 +1,23 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Users from './components/Users'
 import Products from './components/Products'
 import Product from './components/Product'
 import CreateProductForm from './components/CreateProductForm'
-import Home from './components/Home'
 import EditProductForm from './components/EditProductForm'
 import User from './components/User'
+import Registry from './components/Registry'
+import NavBar from './components/NavBar'
+import EditUserForm from './components/EditUserForm'
 
 export default function App() {
     const [reload, setReload] = useState(false)
     const [products, setProducts] = useState(null)
     const [users, setUsers] = useState(null)
-    const productsUrl = 'https://final-project-back-1lcd.onrender.com/products'
-    const usersUrl = 'https://final-project-back-1lcd.onrender.com/users'
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const productsUrl = baseUrl+'/products'
+    const usersUrl = baseUrl+'/users'
 
     const getProducts = async (url) => {
         try {
@@ -23,7 +26,7 @@ export default function App() {
             throw new Error('Problem fetching products')
         }
         const productos = await res.json()
-        setProducts(productos)
+        setProducts(productos.allProducts)
         } catch (error) {
         console.error(error)
         setProducts([])
@@ -51,13 +54,14 @@ export default function App() {
 
   return (
     <>
-    <Router>
+    <NavBar />
       <Routes>
+        <Route path='*' element={<Products />}/>
+        <Route path='/' element={<Products/>}/>
+        <Route path='/registry' element={<Registry/>}/>
         <Route path='/users' element={<Users/>}/>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/products' element={<Products/>}/>
         <Route path='/create' element={<CreateProductForm setReload={setReload}/>}/>
-        {products && 
+        {products &&
           products.map(product => {
             return(
               <>
@@ -67,18 +71,17 @@ export default function App() {
             )
           })
         }
-        {users && 
+        {users &&
           users.map(user => {
             return(
               <>
                 <Route path={`/${user.name}`} element={<User setReload={setReload} user={user}/>}/>
-                <Route path={`/${user.name}/edit`} element={<EditProductForm setReload={setReload} user={user}/>}/>
+                <Route path={`/${user.name}/edit`} element={<EditUserForm setReload={setReload} user={user}/>}/>
               </>
             )
           })
         }
       </Routes>
-    </Router>
     </>
   )
 }

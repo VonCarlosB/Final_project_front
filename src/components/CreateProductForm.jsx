@@ -1,6 +1,5 @@
 import { useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
-import NavBar from "./NavBar"
 
 export default function CreateProductForm({setReload}){
     const [name, setName] = useState('')
@@ -10,7 +9,8 @@ export default function CreateProductForm({setReload}){
     const [redirect, setRedirect] = useState(false)
     const [mensaje, setMensaje] = useState('Listo para enviar')
     const buttons = useRef(null)
-    const createProductUrl = 'https://final-project-back-1lcd.onrender.com/products/create'
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const createProductUrl = baseUrl+'/products/create'
 
     const createProduct = async (e) => {
         e.preventDefault()
@@ -54,7 +54,6 @@ export default function CreateProductForm({setReload}){
 
     return(
         <>
-        <NavBar />
         <h2>Crea tu producto</h2>
         <form onSubmit={(e) => createProduct(e)} onReset={resetForm} encType="multipart/form-data">
             <label>Nombre del producto: *</label>

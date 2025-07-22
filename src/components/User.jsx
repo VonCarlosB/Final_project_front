@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom'
-import NavBar from "./NavBar";
 
 export default function User({setReload, user}){
 
     const [products, setProducts] = useState(null)
     const [mensaje, setMensaje] = useState('')
-    const userProductsUrl = 'https://final-project-back-1lcd.onrender.com/products/user/'
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const userProductsUrl = baseUrl+'/products/user/'
 
     const getProducts = async() => {
         try {
@@ -14,7 +14,7 @@ export default function User({setReload, user}){
             const response = await fetch(userProductsUrl+user.name)
             if(!response.ok) throw new Error('Could not get the products for this user')
             const productos = await response.json()
-            setProducts(productos)
+            setProducts(productos.allProducts)
             setMensaje('')
         } catch (error) {
             console.log(error)
@@ -28,7 +28,6 @@ export default function User({setReload, user}){
 
     return(
         <>
-            <NavBar />
             <div className="userView">
                 <img src={user.image} alt={user.name}/>
                 <div>

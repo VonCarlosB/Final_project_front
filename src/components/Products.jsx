@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import NavBar from './NavBar'
 
 export default function Products(){
     const [products, setProducts] = useState(null)
     const [productInput, setProductInput] = useState('')
-    const productsUrl = 'https://final-project-back-1lcd.onrender.com/products'
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const productsUrl = baseUrl+'/products'
     const defaultImage = 'https://res.cloudinary.com/dp2prqxfo/image/upload/v1753027498/no-image-available-icon-vector_kyibzy.jpg'
     
     const getProducts = async (url) => {
@@ -37,7 +37,6 @@ export default function Products(){
 
     return(
         <>
-            <NavBar />
             <input 
             type='text' 
             value={productInput} 

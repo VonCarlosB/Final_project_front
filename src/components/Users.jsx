@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import NavBar from './NavBar'
 import { Link } from 'react-router-dom'
 export default function Users(){
     const [users, setUsers] = useState(null)
     const [userInput, setUserInput] = useState('')
-    const usersUrl = 'https://final-project-back-1lcd.onrender.com/users'
+    const baseUrl = import.meta.env.VITE_BASE_URL
+    const usersUrl = baseUrl+'/users'
 
     const getUsers = async (url) => {
         try {
@@ -30,7 +30,6 @@ export default function Users(){
 
     return(
         <>
-        <NavBar />
             <input 
             type='text' 
             value={userInput} 
