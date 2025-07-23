@@ -115,10 +115,24 @@ input, textarea{
   background-color: whitesmoke;
   color: black;
   width: 200px;
-  aspect-ratio: 1;
-  padding: 5px 20px 10px 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   text-align: left;
+}
+
+.userCard div{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+}
+
+.userImage{
+  width: 20%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
 .userCard p{
@@ -145,6 +159,7 @@ input, textarea{
 .userName{
   font-size: large;
   font-weight: bold;
+  margin: 0;
 }
 
 .productView{

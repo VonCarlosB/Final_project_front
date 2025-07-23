@@ -43,8 +43,11 @@ export default function Users(){
                 return (
                     <Link to={`/${user.name}`} key={user._id}>
                     <div className='userCard'>
-                    <p className='userName'>{user.name}</p>
-                    <p>Descripción: {user.description}</p>
+                        <div>
+                            <img src={user.image} className='userImage'/>
+                            <h4 className='userName'>{user.name}</h4>
+                        </div>
+                        <p>Descripción: {user.description}</p>
                     </div>
                     </Link>
                 
