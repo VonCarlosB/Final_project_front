@@ -14,8 +14,14 @@ export default function User({setReload, user}){
             const response = await fetch(userProductsUrl+user.name)
             if(!response.ok) throw new Error('Could not get the products for this user')
             const productos = await response.json()
-            setProducts(productos)
-            setMensaje('')
+            if(productos.length > 0) {
+                setProducts(productos)
+                setMensaje('')
+            }
+            else{
+                setProducts(null)
+                setMensaje('Este usuario no tiene productos aún')
+            }
         } catch (error) {
             console.log(error)
             setMensaje('Este usuario no tiene productos')

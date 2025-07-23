@@ -9,7 +9,6 @@ export default function EditUserForm({setReload, user}){
     useEffect(()=>{
         if(name !== user.name){
             setRedirect(true)
-            logout()
         }
     },[])
 

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import Cookies from "js-cookie"
 
-export default function Registry(){
+export default function Registry({ setReload }){
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
@@ -34,6 +34,7 @@ export default function Registry(){
             const data = await response.json()
             if(!data.error){
                 setMensaje('Usuario registrado correctamente')
+                setReload(ref => !ref)
                 setTimeout(()=>{
                     login(data.token, user)
                     setRedirect(true)
@@ -41,6 +42,7 @@ export default function Registry(){
             }
             setMensaje(data.error)
         } catch (error) {
+            console.log(error)
             setMensaje('Error al crear el usuario')
         } finally{
             buttons.current.style.display = 'flex'

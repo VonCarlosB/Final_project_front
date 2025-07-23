@@ -158,6 +158,11 @@ input, textarea{
   text-align: left;
 }
 
+.productView img{
+  width: 80%;
+  padding-left: 10%;
+}
+
 .userView{
   display: flex;
   flex-direction: row;

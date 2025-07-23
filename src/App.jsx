@@ -26,9 +26,8 @@ export default function App() {
             throw new Error('Problem fetching products')
         }
         const productos = await res.json()
-        setProducts(productos.allProducts)
+        setProducts(productos)
         } catch (error) {
-        console.error(error)
         setProducts([])
         }
     }
@@ -58,7 +57,7 @@ export default function App() {
       <Routes>
         <Route path='*' element={<Products />}/>
         <Route path='/' element={<Products/>}/>
-        <Route path='/registry' element={<Registry/>}/>
+        <Route path='/registry' element={<Registry setReload={setReload}/>}/>
         <Route path='/users' element={<Users/>}/>
         <Route path='/create' element={<CreateProductForm setReload={setReload}/>}/>
         {products &&

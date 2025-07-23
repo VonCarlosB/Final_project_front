@@ -1,8 +1,9 @@
-import { useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext"
 
 export default function CreateProductForm({setReload}){
-    const [name, setName] = useState('')
+    const [productName, setProductName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [image, setImage] = useState(null)
@@ -11,13 +12,14 @@ export default function CreateProductForm({setReload}){
     const buttons = useRef(null)
     const baseUrl = import.meta.env.VITE_BASE_URL
     const createProductUrl = baseUrl+'/products/create'
+    const { token, name, isAuthenticated } = useContext(AuthContext)
 
     const createProduct = async (e) => {
         e.preventDefault()
 
         const product = new FormData()
-        product.append('owner', 'Carlos')
-        product.append('name', name)
+        product.append('owner', name)
+        product.append('name', productName)
         product.append('description', description)
         product.append('image', image)
         product.append('price', price)
@@ -25,13 +27,17 @@ export default function CreateProductForm({setReload}){
         try {
             setMensaje('Subiendo el producto...')
             buttons.current.style.display = 'none'
-            const response = await fetch(createProductUrl, {
+            const response = await fetch(createProductUrl,{
                 method: 'POST',
+                headers: {
+                    credentials:'include',
+                    ...(token && {Authorization:`Bearer ${token}`}),
+                },
                 body: product
             })
             if(!response.ok) {
-                const error = await response.json()
-                throw new Error('No se ha podido crear el producto\n'+error.message)
+                const data = await response.json()
+                throw new Error('No se ha podido crear el producto\n'+data.error)
             }else{
                 const data = await response.json()
                 resetForm()
@@ -41,23 +47,28 @@ export default function CreateProductForm({setReload}){
         } catch (error) {
             console.log(error)
             setMensaje('Se ha producido un error, inténtelo de nuevo')
+        } finally{
             buttons.current.style.display = 'flex'
         }
     }
 
     const resetForm = () => {
-        setName('')
+        setProductName('')
         setDescription('')
         setImage(null)
         setPrice(0)
     }
+
+    useEffect(()=>{
+        if(!isAuthenticated) setRedirect(true)
+    },[])
 
     return(
         <>
         <h2>Crea tu producto</h2>
         <form onSubmit={(e) => createProduct(e)} onReset={resetForm} encType="multipart/form-data">
             <label>Nombre del producto: *</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required/>
+            <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required/>
 
             <label>Descripción del producto: *</label>
             <textarea cols='30' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} required/>
