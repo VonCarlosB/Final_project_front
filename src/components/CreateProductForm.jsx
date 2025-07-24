@@ -40,7 +40,6 @@ export default function CreateProductForm({setReload}){
                 throw new Error('No se ha podido crear el producto\n'+data.error)
             }else{
                 const data = await response.json()
-                resetForm()
                 setReload(ref => !ref)
                 setRedirect(true)
             }
