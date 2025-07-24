@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Navigate } from 'react-router-dom'
 import { AuthContext } from "../context/AuthContext";
 
@@ -48,19 +48,22 @@ export default function User({setReload, user}){
                         <p>{user.description}</p>
                     </div>
                 </div>
-                {canEdit && 
-                <div className="botonera">
-                    <button onClick={setRedirectEdit(true)}>Editar perfil</button>
-                    <button onClick={setRedirectNewProduct(true)}>Nuevo producto</button>
-                </div>}
             </div>
             <h4>{mensaje}</h4>
+            {canEdit && 
+            <div className="botonera">
+                <button onClick={() => setRedirectEdit(true)}>Editar perfil</button>
+                <button onClick={() => setRedirectNewProduct(true)}>Nuevo producto</button>
+            </div>
+            }
             {products && 
             <div className="container">
+            
             {products.map(product => {
                 return (
                 <Link to={`/product/${product._id}`} key={product._id} className='userCard'>
                 <p className='userName'>{product.name}</p>
+                <img className='productPreview' src={product.image} alt={`Imagen de ${product.name}`}/>
                 <p className='productOwner'>{product.owner}</p>
                 <p className='productDescription'>{product.description}</p>
                 <p className='productPrice'><b>{product.price+' €'}</b></p>

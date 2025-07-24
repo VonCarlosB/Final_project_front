@@ -6,7 +6,7 @@ export default function EditProductForm({setReload, product}){
     const [productName, setProductName] = useState(product.name)
     const [description, setDescription] = useState(product.description)
     const [price, setPrice] = useState(product.price)
-    const [image, setImage] = useState(product.image)
+    const [image, setImage] = useState(null)
     const [redirect, setRedirect] = useState(false)
     const [mensaje, setMensaje] = useState('Listo para enviar')
     const buttons = useRef(null)
@@ -54,9 +54,9 @@ export default function EditProductForm({setReload, product}){
                 },
                 body: product
             })
-            if(!response.ok) throw new Error('No se ha podido editar el producto')
+            const data = await response.json()
+            if(!response.ok) throw new Error(data.error)
             else{
-                const data = await response.json()
                 setReload(ref => !ref)
                 setRedirect(true)
             }
@@ -82,9 +82,11 @@ export default function EditProductForm({setReload, product}){
 
             <label>Imagen:</label>
             <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
-            {image && <>
-                <img className='imagePreview' src={product.image || URL.createObjectURL(image)}/>
-            </>}
+            {image &&
+                <img className='imagePreview' src={URL.createObjectURL(image)}/>
+            ||
+                <img className='imagePreview' src={product.image}/>
+            }
             {mensaje && <h4>{mensaje}</h4>}
 
             {isAuthenticated && <div className="botonera" ref={buttons}>
