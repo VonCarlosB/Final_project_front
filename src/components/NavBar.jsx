@@ -13,8 +13,7 @@ export default function NavBar(){
             }
             <Link to='/users'>Usuarios</Link>
             <Link to='/'>Productos</Link>
-            {isAuthenticated && <Link to={`/${name}/edit`}>Editar Perfil</Link>}
-            {isAuthenticated && <Link to='/create'>Crear Producto</Link>}
+            {isAuthenticated && <Link to={`/${name}`}>Perfil</Link>}
         </nav>
     )
 }

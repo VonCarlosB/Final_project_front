@@ -1,12 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from 'react-router-dom'
+import { useContext, useEffect, useRef, useState } from "react";
+import { Link, Navigate } from 'react-router-dom'
+import { AuthContext } from "../context/AuthContext";
 
 export default function User({setReload, user}){
 
     const [products, setProducts] = useState(null)
     const [mensaje, setMensaje] = useState('')
+    const [redirectEdit, setRedirectEdit] = useState(false)
+    const [redirectNewProduct, setRedirectNewProduct] = useState(false)
     const baseUrl = import.meta.env.VITE_BASE_URL
     const userProductsUrl = baseUrl+'/products/user/'
+    const { name, isAuthenticated } = useContext(AuthContext)
+    const canEdit = isAuthenticated && name === user.name
 
     const getProducts = async() => {
         try {
@@ -43,6 +48,11 @@ export default function User({setReload, user}){
                         <p>{user.description}</p>
                     </div>
                 </div>
+                {canEdit && 
+                <div className="botonera">
+                    <button onClick={setRedirectEdit(true)}>Editar perfil</button>
+                    <button onClick={setRedirectNewProduct(true)}>Nuevo producto</button>
+                </div>}
             </div>
             <h4>{mensaje}</h4>
             {products && 
@@ -58,7 +68,8 @@ export default function User({setReload, user}){
                 )
             })}
             </div>}
-            
+            {redirectEdit && <Navigate to={`/${name}/edit`}/>}
+            {redirectNewProduct && <Navigate to='/create'/>}
         </>
     )
 }

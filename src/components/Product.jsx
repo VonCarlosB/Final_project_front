@@ -6,7 +6,7 @@ export default function Product({setReload, product}){
     const buttons = useRef(null)
     const [edit, setEdit] = useState(false)
     const { name, isAuthenticated } = useContext(AuthContext)
-    const isOwner = isAuthenticated && product.owner === name
+    const canEdit = isAuthenticated && product.owner === name
 
     return(
         <>
@@ -16,7 +16,7 @@ export default function Product({setReload, product}){
                 <h4>{product.owner}</h4>
                 <p>{product.description}</p>
                 <p>{product.price}€</p>
-                {isOwner && 
+                {canEdit && 
                     <div className="botonera" ref={buttons}>
                     <button onClick={()=>setEdit(true)}>Editar</button>
                     </div>

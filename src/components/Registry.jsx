@@ -6,7 +6,8 @@ import Cookies from "js-cookie"
 export default function Registry({ setReload }){
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
-    const [redirect, setRedirect] = useState(false)
+    const [redirectLogIn, setRedirectLogIn] = useState(false)
+    const [redirectRegister, setRedirectRegister] = useState(false)
     const [mensaje, setMensaje] = useState('')
 
     const { login } = useContext(AuthContext)
@@ -37,7 +38,7 @@ export default function Registry({ setReload }){
                 setReload(ref => !ref)
                 setTimeout(()=>{
                     login(data.token, user)
-                    setRedirect(true)
+                    setRedirectRegister(true)
                 }, 1000)
             }
             setMensaje(data.error)
@@ -68,7 +69,7 @@ export default function Registry({ setReload }){
                 setMensaje('Bienvenido de vuelta')
                 setTimeout(()=>{
                     login(data.token, user)
-                    setRedirect(true)
+                    setRedirectLogIn(true)
                 }, 1000)
             }
             setMensaje(data.error)
@@ -93,7 +94,8 @@ export default function Registry({ setReload }){
                     <button onClick={checkUser}>Entrar</button>
                 </div>
             </div>
-            {redirect && <Navigate replace to='/'/>}
+            {redirectLogIn && <Navigate replace to={`/${user}`}/>}
+            {redirectRegister && <Navigate replace to='/'/>}
         </>
     )
 }
