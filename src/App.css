@@ -5,6 +5,8 @@
 }
 
 form{
+  width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -64,6 +66,8 @@ input, textarea{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .imagePreview{
