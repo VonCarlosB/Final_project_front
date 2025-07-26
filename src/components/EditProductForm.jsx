@@ -76,7 +76,7 @@ export default function EditProductForm({setReload, product}){
             <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} required/>
 
             <label>Descripción del producto: *</label>
-            <textarea cols='30' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} required/>
+            <textarea maxLength={500} cols='30' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} required/>
 
             <label>Precio del producto (€):</label>
             <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>

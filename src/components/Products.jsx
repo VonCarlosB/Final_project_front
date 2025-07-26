@@ -56,7 +56,7 @@ export default function Products(){
                 </Link>
                 )
             }) || <div style={{flexDirection:'column'}}>
-                <h3>Cargando productos...</h3>
+                <h3>Cargando recursos...</h3>
                 <p>Esto puede tardar un poco...</p>
             </div>}
             </div>

@@ -82,7 +82,7 @@ export default function Registry({ setReload }){
 
     return(
         <>
-            <h1>Registro</h1>
+            <h2>Registro</h2>
             <div className="registry">
                 <label>Usuario</label>
                 <input type="text" value={user} onChange={(e) => setUser(e.target.value)}/>

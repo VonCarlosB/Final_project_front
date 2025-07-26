@@ -54,8 +54,7 @@ export default function EditUserForm({setReload, user}){
 
     return(
         <>
-            <h2>Por hacer formulario de edición de usuario</h2>
-            <h2>{user.name}</h2>
+            <h2>Editar usuario '{user.name}'</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label>Imagen de perfil</label>
                 <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
@@ -65,9 +64,9 @@ export default function EditUserForm({setReload, user}){
                     <img className='imagePreview' src={user.image}/>
                 }
                 <label>Descripción</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)}/>
+                <textarea maxLength={200} value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <label>Edad</label>
-                <input type="number" min={0} value={age} onChange={(e) => setAge(e.target.value)} style={{width:'40px'}}/>
+                <input type="number" min={0} max={150} value={age} onChange={(e) => setAge(e.target.value)} style={{width:'40px'}}/>
                 <button type="submit" ref={buttons} style={{width:'30%', margin:'auto'}}>Guardar cambios</button>
                 {mensaje && <h5>{mensaje}</h5>}
             </form>
