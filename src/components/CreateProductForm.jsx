@@ -20,7 +20,8 @@ export default function CreateProductForm({setReload}){
         const product = new FormData()
         product.append('owner', name)
         product.append('name', productName)
-        product.append('description', description)
+        if(description !== '') product.append('description', description)
+        else product.append('description', 'Este producto aún no tiene una descripción')
         product.append('image', image)
         product.append('price', price)
 

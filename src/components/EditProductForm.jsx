@@ -12,7 +12,7 @@ export default function EditProductForm({setReload, product}){
     const buttons = useRef(null)
     const baseUrl = import.meta.env.VITE_BASE_URL
     const editProductUrl = `${baseUrl}/products/${product._id}`
-    const { token, name, isAuthenticated } = useContext(AuthContext)
+    const { token, isAuthenticated } = useContext(AuthContext)
     
     const deleteProduct = async (e) => {
         e.preventDefault()
@@ -39,7 +39,8 @@ export default function EditProductForm({setReload, product}){
 
         const product = new FormData()
         product.append('name', productName)
-        product.append('description', description)
+        if(description !== '') product.append('description', description)
+        else product.append('description', 'Este producto aún no tiene una descripción')
         product.append('image', image)
         product.append('price', price)
 
