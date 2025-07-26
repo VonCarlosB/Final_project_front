@@ -45,9 +45,9 @@ export default function Users(){
                     <div className='userCard'>
                         <div>
                             <img src={user.image} className='userImage'/>
-                            <h4 className='userName'>{user.name}</h4>
+                            <h4>{user.name}</h4>
                         </div>
-                        <p>Descripción: {user.description}</p>
+                        {user.description !== '' && <p>{user.description}</p>}
                     </div>
                     </Link>
                 
