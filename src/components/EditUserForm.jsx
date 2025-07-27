@@ -17,9 +17,9 @@ export default function EditUserForm({setReload, user}){
         e.preventDefault()
 
         const user = new FormData()
-        if(description !== '') user.append('description', description)
+        if(description.trim() !== '') user.append('description', description.trim())
         else user.append('description', 'Este usuario aún no tiene una descripción')
-        user.append('image', image)
+        if(image) user.append('image', image)
         user.append('age', age)
 
         try {

@@ -176,7 +176,6 @@ input, textarea{
 }
 
 .userView img{
-  background-color: red;
   width: 100px;
   aspect-ratio: 1;
   object-fit: cover;

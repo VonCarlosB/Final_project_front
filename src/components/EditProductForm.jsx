@@ -39,9 +39,9 @@ export default function EditProductForm({setReload, product}){
 
         const product = new FormData()
         product.append('name', productName)
-        if(description !== '') product.append('description', description)
+        if(description.trim() !== '') product.append('description', description.trim())
         else product.append('description', 'Este producto aún no tiene una descripción')
-        product.append('image', image)
+        if(image) product.append('image', image)
         product.append('price', price)
 
         try {
@@ -79,7 +79,7 @@ export default function EditProductForm({setReload, product}){
             <textarea maxLength={500} cols='30' rows='10' value={description} onChange={(e) => setDescription(e.target.value)} required/>
 
             <label>Precio del producto (€):</label>
-            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} required/>
+            <input type="number" min={0} value={price} onChange={(e) => setPrice(e.target.value)} required/>
 
             <label>Imagen:</label>
             <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])}/>
