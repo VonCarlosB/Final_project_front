@@ -86,7 +86,6 @@ input, textarea{
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-  border: 1px solid black;
   border-radius: 10px;
 }
 
