@@ -3,7 +3,7 @@
 Este proyecto es un **expositor de productos** de acceso público que no necesita registro para ser consultado. Con capacidad para registrarse e iniciar sesión para poder publicar y editar productos propios.
 Para llevar a cabo esta tarea se ha conectado una base de datos, gestionada a través del back-end [https://github.com/VonCarlosB/Final_project_back](https://github.com/VonCarlosB/Final_project_back) y una sección front-end (este repositorio)
 
-El servicio web está desplegado de forma activa en [https://expositorweb.netlify.app]https://expositorweb.netlify.app
+El servicio web está desplegado de forma activa en [https://expositorweb.netlify.app](https://expositorweb.netlify.app)
 
 ---
 
